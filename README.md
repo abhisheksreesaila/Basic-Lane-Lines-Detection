@@ -9,9 +9,21 @@ The goals / steps of this project are the following:
 
 My pipeline consisted of 5 steps. 
 1. I convert the image to grayscale. This ensure pixel values stay within 0-255 and provide reasonable parameters to work with for future stages.
+
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step1.png)
+
 2. Next we shall perform Gaussian smoothing for suppressing noise and gradients by averaging. We choose a kernel size of 5
+
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step2.png)
+
 3. Apply canny edges – a popular edge detection algorithm. We choose low and high thresholds of 50 and 150 to get to an image similar to the one below.
+
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step3.png)
+
 4. Next we define the region of interest that we have to carve out so that we focus on the lines we need and eliminate the rest. We start by choosing the edges of the images and adjusting the vertices of the polygon (trapezium) until desired. See below.
+
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step4.png)
+
 5. We then derive Hough lines by adjusting the following parameters. Parameter List as follows
 - rho = 2
 - theta = (PI/180)
@@ -29,11 +41,15 @@ My pipeline consisted of 5 steps.
       4.Generate points outside the dataset to extrapolate.
   4.The algorithm above works for most cases but it does not the “solidYellowLeft.mp4” video. This needed careful analysis why the pipeline was failing. By analyzing the X Y points at problematic frames in the video we found below:-
  
+ ![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step6a.png)
  
 7. There are X and Y points that are outliers that needs to be limited. One more interesting observation is that slopes calculated for these points are WAY less than the average slopes of all other points. Henceforth we can conclude we need to eliminate outliers by ignoring all points that have slopes lesser than average by a certain threshold. By trial and error, the threshold was set to 0.2. Now by print the points we get the below chart which validates our logic and the pipeline “works” for the solidYellowLeft.mp4” video.
 
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step6b.png)
 
 The final output on all the images are as follows:-
+
+![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step7.png)
      
 ## Identify potential shortcomings with your current pipeline
 
