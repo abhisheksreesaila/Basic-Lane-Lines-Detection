@@ -32,14 +32,14 @@ My pipeline consisted of 5 steps.
 - Maximum line gap = 50
 
 6. After applying the Hough Transform we needed to extrapolate the line segments you detect to map out the full extent of the lane. In order to do that I modified the draw_lines() function by following the steps outlined:-
-  1. Get the slope of a Hough line
-  2. Bucket LEFT and RIGHT line segments (Negative slopes indicates LEFT segments and positive the RIGHT) 
-  3. For both LEFT and RIGHT segment lines
-      1.Use all the X,Y points and fit a polynomial (line) using the numpy “polyfit” function
-      2.Then use the numpy “poly1d” function to get the actual y=mx+b function.
-      3.This function will be used to fit all points that are outside the dataset i.e. that are not returned by Hough function.
-      4.Generate points outside the dataset to extrapolate.
-  4.The algorithm above works for most cases but it does not the “solidYellowLeft.mp4” video. This needed careful analysis why the pipeline was failing. By analyzing the X Y points at problematic frames in the video we found below:-
+    1. Get the slope of a Hough line
+    2. Bucket LEFT and RIGHT line segments (Negative slopes indicates LEFT segments and positive the RIGHT) 
+    3. For both LEFT and RIGHT segment lines
+          1. Use all the X,Y points and fit a polynomial (line) using the numpy “polyfit” function
+          2. Then use the numpy “poly1d” function to get the actual y=mx+b function.
+          3. This function will be used to fit all points that are outside the dataset i.e. that are not returned by Hough function.
+          4. Generate points outside the dataset to extrapolate.
+    4.The algorithm above works for most cases but it does not the “solidYellowLeft.mp4” video. This needed careful analysis why the pipeline was failing. By analyzing the X Y points at problematic frames in the video we found below:-
  
  ![steps.png](https://github.com/abhisheksreesaila/CarND-LaneLines-P1/raw/master/step6a.png)
  
